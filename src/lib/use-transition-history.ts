@@ -22,6 +22,7 @@ export default function() {
 
   return {
     push: async (path: History.Path, state?: History.LocationState) => {
+      console.log('push - enter');
       if (path !== location.pathname) {
         await Promise.all(
           listeners
@@ -35,10 +36,12 @@ export default function() {
             .map(listener => listener.onLeave!())
         );
       }
-
+      console.log('push - before hisotry push');
       push(path, state);
 
+      console.log('push - after history push');
       if (path !== location.pathname) {
+        console.log({ listeners });
         await Promise.all(
           listeners
             .filter(
