@@ -60,6 +60,27 @@ a {
   height: 100vh;
 }
 
+.mid .btnPrev {
+  position: absolute;
+  top: 50px;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+.mid .btnPrev {
+  position: absolute;
+  left: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mid .btnNext {
+  position: absolute;
+  right: 50px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 @media (max-width: 576px) {
   a {
     font-size: 1.4em;
@@ -67,14 +88,13 @@ a {
   }
 
   .mid .btnPrev {
-    position: absolute;
     top: 50px;
     transform: translateX(-50%);
     left: 50%;
   }
 
   .mid .btnNext {
-    position: absolute;
+    top: auto;
     bottom: 50px;
     transform: translateX(-50%);
     left: 50%;
