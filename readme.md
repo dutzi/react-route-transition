@@ -1,6 +1,6 @@
 # React Route Transition
 
-A tiny (**2.2kb gzipped**) and simple transition orchestrator for React.
+A tiny (**1.4kb gzipped**) and simple transition orchestrator for React.
 
 [Example](http://dutzi.github.io/react-route-transition)
 
