@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { TransitionProvider } from './TransitionProvider';
 
-function ReactRouterTransitionProvider({
+function RouteTransitionProvider({
   children,
 }: {
   children: React.ReactElement;
@@ -17,4 +17,4 @@ function ReactRouterTransitionProvider({
   );
 }
 
-export { ReactRouterTransitionProvider };
+export { RouteTransitionProvider };

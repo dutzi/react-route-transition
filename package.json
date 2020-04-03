@@ -1,6 +1,6 @@
 {
   "name": "react-route-transition",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "description": "A tiny transition orchestrator for React",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
@@ -25,11 +25,11 @@
     "animation",
     "tween"
   ],
-  "author": "the@dutzi.party",
+  "author": "dutzi",
   "license": "MIT",
-  "dependencies": {
-    "react": "^16.13.1",
-    "react-router-dom": "^5.1.2"
+  "peerDependencies": {
+    "react": ">=16",
+    "react-router-dom": ">=5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

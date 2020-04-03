@@ -1,4 +1,3 @@
-// import babel from 'rollup-plugin-babel';
 import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 
@@ -12,9 +11,9 @@ export default [
     plugins: [typescript(), terser()],
   },
   {
-    input: './src/index-react-router.ts',
+    input: './src/index-core.ts',
     output: {
-      file: './dist/bundle-react-router.js',
+      file: './dist/bundle-core.js',
       format: 'cjs',
     },
     plugins: [typescript(), terser()],

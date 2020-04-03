@@ -1,3 +1,5 @@
+asd
+
 # React Route Transition
 
 A tiny (**2.2kb gzipped**) and simple transition orchestrator for React.
@@ -17,20 +19,20 @@ If you are using [react-router](https://github.com/ReactTraining/react-router):
 
 ```js
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { ReactRouterTransitionProvider } from 'react-route-transition/react-router';
+import { RouteTransitionProvider } from 'react-route-transition';
 // import Home and SignIn components...
 
-export default function() {
+export default function () {
   return (
     <Router>
-      <ReactRouterTransitionProvider>
+      <RouteTransitionProvider>
         <Route path="/" exact>
           <Home />
         </Route>
         <Route path="/signin" exact>
           <SignIn />
         </Route>
-      </ReactRouterTransitionProvider>
+      </RouteTransitionProvider>
     </Router>
   );
 }
@@ -41,12 +43,9 @@ export default function() {
 ```jsx
 import React from 'react';
 import gsap from 'gsap';
-import {
-  useTransition,
-  useTransitionHistory,
-} from 'react-route-transition/react-router';
+import { useTransition, useTransitionHistory } from 'react-route-transition';
 
-export default function() {
+export default function () {
   const history = useTransitionHistory();
 
   // The following tells react-router-transition that whenever the user
@@ -105,7 +104,7 @@ export default function() {
 ```jsx
 // same imports as above...
 
-export default function() {
+export default function () {
   const history = useTransitionHistory();
 
   useTransition({
@@ -150,10 +149,10 @@ If you are not using react-router you can still use react-route-transition, only
 - `push: (path: History.Path, state?: History.LocationState) => void` - an object with a single function called `push` that accepts a path (string) and an optional state.
 - `location: { pathname: History.Path }` - an object with a prop named pathname that is the current path.
 
-Also, you will need to import `<TransitionProvider>` directly from `react-route-transition`:
+Also, you will need to import `<TransitionProvider>` from `react-route-transition/core`:
 
 ```js
-import { TransitionProvider } from 'react-route-transition';
+import { TransitionProvider } from 'react-route-transition/core';
 ```
 
 ## API
