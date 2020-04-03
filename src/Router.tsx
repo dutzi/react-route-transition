@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import FirstView from './FirstView';
 import MidView from './MidView';
 import LastView from './LastView';
@@ -22,8 +22,8 @@ export default () => {
   );
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <RouteTransitionProvider>{content}</RouteTransitionProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
