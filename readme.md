@@ -13,9 +13,11 @@ yarn add react-route-transition
 
 ## API
 
-`useTransitionHistory()` - returns an object with a single function named `push` that accepts a path (string) and an optional state. Calling this starts the orchestrator, which start the relevant leave animations, waits for them to finish, changes the route and starts the relevant enter animations.
+`<RouteTransitionProvider>` - for react-route-transition to work you first need to wrap your app with this provider (place it _inside_ of react-router's `Router`).
 
-`useTransition(options: ITransitionOptions)` - this hook tells react-route-transition which animations is this component "waiting" for. It accepts an object that looks as follows:
+`useTransitionHistory()` - returns an object with a single function named `push` that accepts a path (string) and an optional state object. Calling this starts the orchestrator, which fires the relevant `onLeave` animations, waits for them to finish, changes the route and fires the relevant `onEnter` animations.
+
+`useTransition(options: ITransitionOptions)` - this hook registers animations for the current components (it tells react-route-transition which route changes this component listens to and which animations it should fire accordingly). It accepts an object that looks as follows:
 
 ```js
 useTransition({
@@ -24,11 +26,13 @@ useTransition({
     {
       // each handler can either define a path, the path can either be a
       // string (single path), or an array of strings (multiple paths)
+      //
       path: '/signin',
       // each handler should implement either an onEnter callback, that will
-      // be fired once entering said path, or an onLeave callback
+      // be fired once entering said path, or an onLeave callback, or both
+      //
       onEnter: async () => {
-        gsap.timeline().fromTo(
+        await gsap.timeline().fromTo(
           '[data-signin-wrapper] > *',
           { y: 20, opacity: 0 },
           {
@@ -124,6 +128,7 @@ export default function () {
     e.preventDefault();
     // remember this is react-route-animation's push() method, which wraps
     // react-router's method and plays the animations
+    //
     history.push('/signin');
   }
 
@@ -188,8 +193,8 @@ export default function () {
 
 If you are not using react-router you can still use react-route-transition, only you need to provide `<TransitionProvider>` two props:
 
-- `push: (path: History.Path, state?: History.LocationState) => void` - an object with a single function called `push` that accepts a path (string) and an optional state.
-- `location: { pathname: History.Path }` - an object with a prop named pathname that is the current path.
+- `push: (path: History.Path, state?: History.LocationState) => void` - an object with a single function called `push` that accepts a path (string) and an optional state. When calling that push method the current route should change.
+- `location: { pathname: History.Path }` - an object with a prop named `pathname` that listens to path changes and updates accordingly.
 
 Also, you will need to import `<TransitionProvider>` from `react-route-transition/core`:
 
