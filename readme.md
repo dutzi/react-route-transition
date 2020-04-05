@@ -2,7 +2,7 @@
 
 A tiny (**1.4kb gzipped**) and simple transition orchestrator for React.
 
-[Example](http://dutzi.github.io/react-route-transition)
+[Example](http://dutzi.github.io/react-route-transition). [Blog Post](https://dutzi.party/animating-route-transitions-using-react-router/).
 
 ## Install
 
