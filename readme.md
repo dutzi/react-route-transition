@@ -11,6 +11,48 @@ yarn add react-route-transition
 # or npm install --save react-route-transition
 ```
 
+## API
+
+`useTransitionHistory()` - returns an object with a single function named `push` that accepts a path (string) and an optional state. Calling this starts the orchestrator, which start the relevant leave animations, waits for them to finish, changes the route and starts the relevant enter animations.
+
+`useTransition(options: ITransitionOptions)` - this hook tells react-route-transition which animations is this component "waiting" for. It accepts an object that looks as follows:
+
+```js
+useTransition({
+  // the list of "handlers"
+  handlers: [
+    {
+      // each handler can either define a path, the path can either be a
+      // string (single path), or an array of strings (multiple paths)
+      path: '/signin',
+      // each handler should implement either an onEnter callback, that will
+      // be fired once entering said path, or an onLeave callback
+      onEnter: async () => {
+        gsap.timeline().fromTo(
+          '[data-signin-wrapper] > *',
+          { y: 20, opacity: 0 },
+          {
+            y: 0,
+            duration: 0.6,
+            stagger: 0.125,
+            opacity: 1,
+          }
+        );
+      },
+      onLeave: async () => {
+        await gsap.timeline().to('[data-home-main] > *, [data-home-footer]', {
+          duration: 0.6,
+          stagger: 0.125,
+          opacity: 0,
+          y: -20,
+        });
+      },
+    },
+    // ... more handlers
+  ],
+});
+```
+
 ## Example Usage
 
 If you are using [react-router](https://github.com/ReactTraining/react-router):
@@ -153,48 +195,6 @@ Also, you will need to import `<TransitionProvider>` from `react-route-transitio
 
 ```js
 import { TransitionProvider } from 'react-route-transition/core';
-```
-
-## API
-
-`useTransitionHistory()` - returns an object with a single function named `push` that accepts a path (string) and an optional state. Calling this starts the orchestrator, which start the relevant leave animations, waits for them to finish, changes the route and starts the relevant enter animations.
-
-`useTransition(options: ITransitionOptions)` - this hook tells react-route-transition which animations is this component "waiting" for. It accepts an object that looks as follows:
-
-```js
-useTransition({
-  // the list of "handlers"
-  handlers: [
-    {
-      // each handler can either define a path, the path can either be a
-      // string (single path), or an array of strings (multiple paths)
-      path: '/signin',
-      // each handler should implement either an onEnter callback, that will
-      // be fired once entering said path, or an onLeave callback
-      onEnter: async () => {
-        gsap.timeline().fromTo(
-          '[data-signin-wrapper] > *',
-          { y: 20, opacity: 0 },
-          {
-            y: 0,
-            duration: 0.6,
-            stagger: 0.125,
-            opacity: 1,
-          }
-        );
-      },
-      onLeave: async () => {
-        await gsap.timeline().to('[data-home-main] > *, [data-home-footer]', {
-          duration: 0.6,
-          stagger: 0.125,
-          opacity: 0,
-          y: -20,
-        });
-      },
-    },
-    // ... more handlers
-  ],
-});
 ```
 
 ### More options
