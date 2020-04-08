@@ -7,17 +7,25 @@ function arrarizePath(pathOrPaths: TPathOrPaths) {
   return typeof pathOrPaths === 'string' ? [pathOrPaths] : pathOrPaths ?? [];
 }
 
+function removeSearch(path: History.Path) {
+  return path.split('?')[0];
+}
+
+function removeSearchArray(paths: History.Path[]) {
+  return paths.map(removeSearch);
+}
+
 function hasPath(pathOrPaths: TPathOrPaths, path: History.Path) {
-  const pathsArray = arrarizePath(pathOrPaths);
+  const pathsArray = removeSearchArray(arrarizePath(pathOrPaths));
 
   if (pathsArray.indexOf('*') !== -1) {
     return true;
   }
 
-  return pathsArray.indexOf(path) !== -1;
+  return pathsArray.indexOf(removeSearch(path)) !== -1;
 }
 
-export default function() {
+export default function () {
   const { listeners, location, push } = useContext(TransitionContext);
 
   return {
@@ -26,13 +34,13 @@ export default function() {
         await Promise.all(
           listeners
             .filter(
-              listener =>
+              (listener) =>
                 hasPath(listener.path, location.pathname) ||
                 (hasPath(listener.from, location.pathname) &&
                   hasPath(listener.to, path))
             )
-            .filter(listener => !!listener.onLeave)
-            .map(listener => listener.onLeave!())
+            .filter((listener) => !!listener.onLeave)
+            .map((listener) => listener.onLeave!())
         );
       }
 
@@ -42,13 +50,13 @@ export default function() {
         await Promise.all(
           listeners
             .filter(
-              listener =>
+              (listener) =>
                 hasPath(listener.path, path) ||
                 (hasPath(listener.from, location.pathname) &&
                   hasPath(listener.to, path))
             )
-            .filter(listener => !!listener.onEnter)
-            .map(listener => listener.onEnter!())
+            .filter((listener) => !!listener.onEnter)
+            .map((listener) => listener.onEnter!())
         );
       }
     },

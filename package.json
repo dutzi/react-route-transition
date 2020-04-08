@@ -1,6 +1,6 @@
 {
   "name": "react-route-transition",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "A tiny transition orchestrator for React",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
@@ -46,5 +46,6 @@
     "tslib": "^1.11.1",
     "typescript": "^3.8.3",
     "typings": "^2.1.1"
-  }
+  },
+  "dependencies": {}
 }
