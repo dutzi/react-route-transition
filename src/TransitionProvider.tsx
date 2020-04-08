@@ -18,7 +18,7 @@ function TransitionProvider({
   push,
   location,
 }: {
-  children: React.ReactElement;
+  children: React.ReactNode;
   push: TPush;
   location: TLocation;
 }) {
