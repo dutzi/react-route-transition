@@ -1,5 +1,5 @@
 import { TPathOrPaths } from './types';
-import { useContext } from 'react';
+import { useContext, useCallback } from 'react';
 import * as History from 'history';
 import { TransitionContext } from './TransitionProvider';
 
@@ -26,10 +26,12 @@ function hasPath(pathOrPaths: TPathOrPaths, path: History.Path) {
 }
 
 export default function () {
-  const { listeners, location, push } = useContext(TransitionContext);
+  const { listeners, location, push: wrappedPush } = useContext(
+    TransitionContext
+  );
 
-  return {
-    push: async (path: History.Path, state?: History.LocationState) => {
+  const push = useCallback(
+    async (path: History.Path, state?: History.LocationState) => {
       if (path !== location.pathname) {
         await Promise.all(
           listeners
@@ -44,7 +46,7 @@ export default function () {
         );
       }
 
-      push(path, state);
+      wrappedPush(path, state);
 
       if (path !== location.pathname) {
         await Promise.all(
@@ -60,5 +62,10 @@ export default function () {
         );
       }
     },
+    []
+  );
+
+  return {
+    push,
   };
 }
