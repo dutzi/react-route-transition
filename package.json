@@ -8,7 +8,8 @@
     "build:rollup": "rollup -c",
     "create-dts": "tsc --emitDeclarationOnly --declaration --declarationDir dist",
     "build": "npm run build:rollup && npm run create-dts",
-    "test": "echo \"Warning: no test specified\" && exit 0"
+    "test": "echo \"Warning: no test specified\" && exit 0",
+    "prepare": "npm run build"
   },
   "homepage": "https://github.com/dutzi/react-route-transition#readme",
   "bugs": {
