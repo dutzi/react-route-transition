@@ -1,6 +1,6 @@
 {
   "name": "react-route-transition",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A tiny transition orchestrator for React",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,8 @@
     "build:rollup": "rollup -c",
     "create-dts": "tsc --emitDeclarationOnly --declaration --declarationDir dist",
     "build": "npm run build:rollup && npm run create-dts",
-    "test": "echo \"Warning: no test specified\" && exit 0"
+    "test": "echo \"Warning: no test specified\" && exit 0",
+    "prepare": "npm run build"
   },
   "homepage": "https://github.com/dutzi/react-route-transition#readme",
   "bugs": {

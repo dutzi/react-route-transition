@@ -4,14 +4,22 @@ import * as History from 'history';
 import { TransitionContext } from './TransitionProvider';
 
 function arrarizePath(pathOrPaths: TPathOrPaths) {
-  return typeof pathOrPaths === 'string' ? [pathOrPaths] : pathOrPaths ?? [];
+  if (typeof pathOrPaths === 'string' || pathOrPaths instanceof RegExp) {
+    return [pathOrPaths];
+  }
+
+  return pathOrPaths ?? [];
 }
 
-function removeSearch(path: History.Path) {
-  return path.split('?')[0];
+function removeSearch(path: History.Path | RegExp) {
+  if (typeof path === 'string') {
+    return path.split('?')[0];
+  }
+
+  return path;
 }
 
-function removeSearchArray(paths: History.Path[]) {
+function removeSearchArray(paths: (History.Path | RegExp)[]) {
   return paths.map(removeSearch);
 }
 
@@ -22,7 +30,23 @@ function hasPath(pathOrPaths: TPathOrPaths, path: History.Path) {
     return true;
   }
 
-  return pathsArray.indexOf(removeSearch(path)) !== -1;
+  if (
+    pathsArray
+      .filter((path) => typeof path === 'string')
+      .indexOf(removeSearch(path)) !== -1
+  ) {
+    return true;
+  }
+
+  if (
+    pathsArray
+      .filter((path) => path instanceof RegExp)
+      .find((currentPath) => (currentPath as RegExp).test(path))
+  ) {
+    return true;
+  }
+
+  return false;
 }
 
 export default function () {
