@@ -1,6 +1,10 @@
 import * as History from 'history';
 
-export type TPathOrPaths = History.Path | History.Path[] | undefined;
+export type TPathOrPaths =
+  | History.Path
+  | RegExp
+  | (History.Path | RegExp)[]
+  | undefined;
 
 export interface ITransitionListener {
   path?: TPathOrPaths;
