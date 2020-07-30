@@ -24,9 +24,9 @@ useTransition({
   // the list of "handlers"
   handlers: [
     {
-      // each handler can either define a path, the path can either be a
-      // string/regexp (single path), or an array of strings/regexps (multiple
-      // paths)
+      // path tells the orchestrator which path this handler "handles".
+      // the path can either be a string/regexp (single path), or an
+      // array of strings/regexps, for multiple paths
       //
       path: '/signin',
       // each handler should implement either an onEnter callback, that will
